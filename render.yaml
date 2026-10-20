@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: vianova-public-beta
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    healthCheckPath: /health
+    envVars:
+      - key: VIANOVA_SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
